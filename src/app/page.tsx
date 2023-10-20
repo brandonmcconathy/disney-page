@@ -2,21 +2,27 @@
 
 import axios from "axios"
 import { useState, useEffect } from "react"
+import AttractionDisplay from "./components/attractiondisplay"
 
 export default function Home() {
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect( () => {
 
-    axios.get('https://api.themeparks.wiki/v1/entity/7340550b-c14d-4def-80bb-acdb51d49a66/children').then((response) => {
-      let temp : Array<object> = []
-      response.data.children.map( (attraction: any) => {
+    axios.get('https://api.themeparks.wiki/v1/entity/bfc89fd6-314d-44b4-b89e-df1a89cf991e/live').then((response) => {
+      const attractions : any[] = []
+      response.data.liveData.map( (attraction: any) => {
         if (attraction.entityType == 'ATTRACTION') {
-          temp.push(attraction)
+          attractions.push(attraction)
         }
       })
-      setData(temp)
+      attractions.map((attraction) => {
+
+      })
+      setData(attractions)
+      setLoading(false)
     })
 
   },[])
@@ -24,8 +30,12 @@ export default function Home() {
   console.log(data)
 
   return (
-    <div>
+    <main>
+      {loading ? <h1>Loading</h1> : 
+      <div>
+        {data.map((attraction) => <AttractionDisplay data={attraction} key={attraction.id} /> )}
+      </div>}
 
-    </div>
+    </main>
   )
 }
