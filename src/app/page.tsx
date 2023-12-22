@@ -7,6 +7,8 @@ import AttractionDisplay from "./components/attractiondisplay"
 export default function Home() {
 
   const [data, setData] = useState<any[]>([])
+  const [disneyRides, setDisneyRides] = useState<any[]>([])
+  const [dcaRides, setDcaRides] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect( () => {
@@ -18,15 +20,25 @@ export default function Home() {
           attractions.push(attraction)
         }
       })
-      attractions.map((attraction) => {
-
+      let disneyAttractions:any[] = []
+      let dcaAttractions:any[] = []
+      attractions.map((attraction:any) => {
+        if (attraction.parkId == '7340550b-c14d-4def-80bb-acdb51d49a66') {
+          disneyAttractions.push(attraction)
+        } else {
+          dcaAttractions.push(attraction)
+        }
       })
+      setDisneyRides(disneyAttractions)
+      setDcaRides(dcaAttractions)
       setData(attractions)
       setLoading(false)
     })
 
   },[])
 
+  console.log(disneyRides)
+  console.log(dcaRides)
   console.log(data)
 
   return (
