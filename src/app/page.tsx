@@ -10,6 +10,7 @@ export default function Home() {
   const [disneyRides, setDisneyRides] = useState<any[]>([])
   const [dcaRides, setDcaRides] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [park, setPark] = useState(true)
 
   useEffect( () => {
 
@@ -37,17 +38,39 @@ export default function Home() {
 
   },[])
 
+  const handleClick = () => {
+    setPark(!park)
+  }
+
   console.log(disneyRides)
   console.log(dcaRides)
   console.log(data)
 
+  if (park) {
+    return(
+      <main>
+        {loading ? <h1>Loading</h1> : 
+        <div>
+          <button onClick={handleClick}>Show California Adventure</button>
+          <div>
+          {disneyRides.map((attraction) => <AttractionDisplay data={attraction} key={attraction.id} /> )}
+          </div>
+        </div>
+        }
+    </main>
+    )
+  }
+
   return (
     <main>
       {loading ? <h1>Loading</h1> : 
-      <div>
-        {data.map((attraction) => <AttractionDisplay data={attraction} key={attraction.id} /> )}
-      </div>}
-
+        <div>
+          <button onClick={handleClick}>Show Disneyland</button>
+          <div>
+          {dcaRides.map((attraction) => <AttractionDisplay data={attraction} key={attraction.id} /> )}
+          </div>
+        </div>
+        }
     </main>
   )
 }
