@@ -46,24 +46,16 @@ export default function Home() {
   console.log(dcaRides)
   console.log(data)
 
-  if (park) {
-    return(
-      <main>
-        {loading ? <h1>Loading</h1> : 
-        <div>
+  return (
+    <main>
+      {loading ? <h1>Loading</h1> : 
+      park ?
+      <div>
           <button onClick={handleClick}>Show California Adventure</button>
           <div>
           {disneyRides.map((attraction) => <AttractionDisplay data={attraction} key={attraction.id} /> )}
           </div>
-        </div>
-        }
-    </main>
-    )
-  }
-
-  return (
-    <main>
-      {loading ? <h1>Loading</h1> : 
+        </div> :
         <div>
           <button onClick={handleClick}>Show Disneyland</button>
           <div>
