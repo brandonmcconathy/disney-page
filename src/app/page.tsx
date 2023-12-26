@@ -42,10 +42,6 @@ export default function Home() {
     setPark(!park)
   }
 
-  console.log(disneyRides)
-  console.log(dcaRides)
-  console.log(data)
-
   return (
     <main>
       {loading ? <h1>Loading</h1> : 
