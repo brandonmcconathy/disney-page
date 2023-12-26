@@ -43,12 +43,12 @@ export default function Home() {
   }
 
   return (
-    <main>
+    <main className="flex justify-center items-center">
       {loading ? <h1>Loading</h1> : 
       park ?
-      <div>
+      <div className="flex flex-col justify-center items-center">
           <button onClick={handleClick}>Show California Adventure</button>
-          <div>
+          <div className="flex flex-col justify-center items-center">
           {disneyRides.map((attraction) => <AttractionDisplay data={attraction} key={attraction.id} /> )}
           </div>
         </div> :
